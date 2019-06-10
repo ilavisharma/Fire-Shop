@@ -1,6 +1,7 @@
 import React from 'react';
-import CardList from './Home/CardDeck';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
+import CardDeck from './Home/CardDeck';
 
 class App extends React.Component {
   componentDidMount() {}
@@ -8,8 +9,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <CardList />
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={CardDeck} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
