@@ -2,17 +2,15 @@ import React from 'react';
 
 class Card extends React.Component {
   render() {
+    const { image, name, price } = this.props.product;
     return (
       <div class="card">
-        <img src="..." class="card-img-top" alt="..." />
+        <img src={image} class="card-img-top" alt="guitar" />
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
+          <h5 class="card-title">{name}</h5>
+          <p class="card-text">{price}</p>
           <p class="card-text">
-            This is a longer card with supporting text below as a natural
-            lead-in to additional content. This content is a little bit longer.
-          </p>
-          <p class="card-text">
-            <small class="text-muted">Last updated 3 mins ago</small>
+            <small class="text-muted">{price}</small>
           </p>
         </div>
       </div>
