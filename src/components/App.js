@@ -1,5 +1,5 @@
 import React from 'react';
-import firebase from '../lib/firebase';
+import CardList from './Home/CardDeck';
 import Navbar from './Navbar';
 
 class App extends React.Component {
@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <div>
         <Navbar />
-        <div>Hello</div>
+        <CardList />
       </div>
     );
   }
