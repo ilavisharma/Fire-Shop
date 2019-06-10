@@ -4,8 +4,6 @@ import Navbar from './Navbar';
 import CardDeck from './Home/CardDeck';
 
 class App extends React.Component {
-  componentDidMount() {}
-
   render() {
     return (
       <div>
