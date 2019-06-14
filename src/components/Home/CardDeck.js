@@ -31,8 +31,13 @@ class CardDeck extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div class="card-deck">{this.renderCards()}</div>
+      <div className="container-fluid">
+        <div
+          className="row text-center d-flex"
+          style={{ display: 'flex', flexWrap: 'wrap' }}
+        >
+          {this.renderCards()}
+        </div>
       </div>
     );
   }
