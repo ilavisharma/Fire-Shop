@@ -23,19 +23,16 @@ class CardDeck extends React.Component {
 
   renderCards = () => {
     const { products } = this.props;
-
     if (products !== []) {
-      return products.map(product => {
-        return (
-          <ProductCard
-            photos={product.image}
-            price={`Rs ${product.price}`}
-            productName={product.name}
-            buttonText="Add to Cart"
-            key={product.id}
-          />
-        );
-      });
+      return products.map(product => (
+        <ProductCard
+          photos={product.image}
+          price={`Rs ${product.price}`}
+          productName={product.name}
+          buttonText="Add to Cart"
+          key={product.id}
+        />
+      ));
     }
   };
 
@@ -45,7 +42,17 @@ class CardDeck extends React.Component {
   }
 
   render() {
-    return <div className="card-container">{this.renderCards()}</div>;
+    if (this.props.products.length === 0) {
+      return (
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      );
+    } else {
+      return <div className="card-container">{this.renderCards()}</div>;
+    }
   }
 }
 
