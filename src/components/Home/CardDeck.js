@@ -4,6 +4,7 @@ import { fetchProducts, clearProducts } from '../../actions';
 import firebase from '../../lib/firebase';
 import { ProductCard } from 'react-ui-cards';
 import './CardDeck.css';
+import { Link } from 'react-router-dom';
 
 class CardDeck extends React.Component {
   componentDidMount() {
@@ -25,13 +26,15 @@ class CardDeck extends React.Component {
     const { products } = this.props;
     if (products !== []) {
       return products.map(product => (
-        <ProductCard
-          photos={product.image}
-          price={`Rs ${product.price}`}
-          productName={product.name}
-          buttonText="Add to Cart"
-          key={product.id}
-        />
+        <Link style={{ textDecoration: 'none' }} to={`/product/${product.id}`}>
+          <ProductCard
+            photos={product.image}
+            price={`Rs ${product.price}`}
+            productName={product.name}
+            key={product.id}
+            buttonText=""
+          />
+        </Link>
       ));
     }
   };
@@ -44,9 +47,9 @@ class CardDeck extends React.Component {
   render() {
     if (this.props.products.length === 0) {
       return (
-        <div class="text-center">
-          <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
+        <div className="text-center">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
           </div>
         </div>
       );
@@ -64,5 +67,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchProducts, clearProducts: clearProducts }
+  { fetchProducts, clearProducts }
 )(CardDeck);
