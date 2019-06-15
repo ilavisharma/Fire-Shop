@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../../actions';
+import { fetchProducts, clearProducts } from '../../actions';
 import firebase from '../../lib/firebase';
 import { ProductCard } from 'react-ui-cards';
 import './CardDeck.css';
@@ -39,6 +39,11 @@ class CardDeck extends React.Component {
     }
   };
 
+  componentWillUnmount() {
+    // clear the products when this component will unmount
+    this.props.clearProducts();
+  }
+
   render() {
     return <div className="card-container">{this.renderCards()}</div>;
   }
@@ -52,5 +57,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchProducts }
+  { fetchProducts, clearProducts: clearProducts }
 )(CardDeck);
