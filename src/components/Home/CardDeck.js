@@ -1,5 +1,4 @@
 import React from 'react';
-// import Card from './Card';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../../actions';
 import firebase from '../../lib/firebase';
