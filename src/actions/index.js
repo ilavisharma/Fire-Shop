@@ -23,19 +23,9 @@ export const fetchProducts = () => async dispatch => {
     console.log('There was some error\n', e);
   }
 };
-/*
 
-const fetchProduct= id => async dispatch => {
-    const ProductRef= firebase.firestore().collection('products').doc(id)
-    
-    try {
-        // get the document snapshot
-        const snapshot= await ProductRef.get()
-
-
-        // extract the data
-        // dispatch
-    }
-    catch (err) {console.log(err)}
-}
-*/
+export const clearProducts = () => {
+  return {
+    type: 'CLEAR_PRODUCTS'
+  };
+};
