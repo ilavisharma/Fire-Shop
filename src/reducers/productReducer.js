@@ -3,6 +3,9 @@ export default (state = [], action) => {
     case 'FETCH_PRODUCTS':
       return action.payload;
 
+    case 'CLEAR_PRODUCTS':
+      return [];
+
     default:
       return state;
   }
