@@ -27,7 +27,6 @@ class CardDeck extends React.Component {
 
     if (products !== []) {
       return products.map(product => {
-        // return <Card product={product} key={product.id} />;
         return (
           <ProductCard
             photos={product.image}
@@ -42,19 +41,7 @@ class CardDeck extends React.Component {
   };
 
   render() {
-    return (
-      // <div className="container-fluid">
-      //   <div
-      //     className="row text-center d-flex"
-      //     style={{ display: 'flex', flexWrap: 'wrap' }}
-      //   >
-      //     {this.renderCards()}
-      //   </div>
-      // </div>
-      <div className="">
-        <div className="card-container">{this.renderCards()}</div>
-      </div>
-    );
+    return <div className="card-container">{this.renderCards()}</div>;
   }
 }
 
