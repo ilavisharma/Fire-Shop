@@ -29,3 +29,30 @@ export const clearProducts = () => {
     type: 'CLEAR_PRODUCTS'
   };
 };
+
+export const fetchProduct = docId => async dispatch => {
+  const ProductRef = firebase
+    .firestore()
+    .collection('products')
+    .doc(docId);
+
+  try {
+    // get document snapshot
+    const doc = await ProductRef.get();
+    if (!doc.exists) {
+      console.log('No such Document');
+      dispatch({
+        type: 'FETCH_PRODUCT',
+        payload: null
+      });
+    } else {
+      const docData = doc.data();
+      dispatch({
+        type: 'FETCH_PRODUCT',
+        payload: { ...docData, id: doc.id }
+      });
+    }
+  } catch (e) {
+    console.log('There was some error\n', e);
+  }
+};
