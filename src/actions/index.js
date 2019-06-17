@@ -56,3 +56,9 @@ export const fetchProduct = docId => async dispatch => {
     console.log('There was some error\n', e);
   }
 };
+
+export const clearProduct = () => {
+  return {
+    type: 'CLEAR_PRODUCT'
+  };
+};
