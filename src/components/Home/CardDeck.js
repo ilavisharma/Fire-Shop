@@ -54,7 +54,11 @@ class CardDeck extends React.Component {
         </div>
       );
     } else {
-      return <div className="card-container">{this.renderCards()}</div>;
+      return (
+        <div className="container-fluid">
+          <div className="card-container">{this.renderCards()}</div>
+        </div>
+      );
     }
   }
 }
