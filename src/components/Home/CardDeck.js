@@ -5,6 +5,7 @@ import firebase from '../../lib/firebase';
 import { ProductCard } from 'react-ui-cards';
 import './CardDeck.css';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 class CardDeck extends React.Component {
   componentDidMount() {
@@ -56,7 +57,13 @@ class CardDeck extends React.Component {
     } else {
       return (
         <div className="container-fluid">
-          <div className="card-container">{this.renderCards()}</div>
+          <div className="card-container">
+            {/* Helmet for meta tags */}
+            <Helmet>
+              <title>React Shop - Welcome</title>
+            </Helmet>
+            {this.renderCards()}
+          </div>
         </div>
       );
     }

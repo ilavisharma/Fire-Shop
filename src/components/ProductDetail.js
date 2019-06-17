@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProduct, clearProduct } from '../actions';
+import { Helmet } from 'react-helmet';
 import Carousel from './Carousel';
 
 class ProductDetail extends React.Component {
@@ -25,6 +26,10 @@ class ProductDetail extends React.Component {
       const { price, image, name } = this.props.product;
       return (
         <div className="container">
+          {/* Helmet for meta tags */}
+          <Helmet>
+            <title>{name}</title>
+          </Helmet>
           <div className="row">
             <div class="col-md-3">
               <div class="list-group">
@@ -34,14 +39,9 @@ class ProductDetail extends React.Component {
               </div>
             </div>
             <div className="col-md-9">
-              {/* <div className="thumbnail">
-                <img src={image[0]} alt="product" className="img-fluid" />
-                <div className="caption-full">
-                  <h4 className="pull-right">{`Rs${price}`}</h4>
-                </div>
-              </div> */}
               <h4 className="display-4">{name}</h4>
               <Carousel images={image} />
+              <h5>{`Rs ${price}`}</h5>
             </div>
           </div>
         </div>
