@@ -60,7 +60,7 @@ class CardDeck extends React.Component {
           <div className="card-container">
             {/* Helmet for meta tags */}
             <Helmet>
-              <title>React Shop - Welcome</title>
+              <title>Guitar Shop - Welcome</title>
             </Helmet>
             {this.renderCards()}
           </div>
