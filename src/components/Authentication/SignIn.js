@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { iconStyle } from '../../styles/icons';
+import GoogleAuth from './GoogleAuth';
+import FacebookAuth from './FacebookAuth';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +14,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="container-fluid  bg-light text-dark">
+    <div className="container-fluid text-dark">
       <div className="row justify-content-center align-items-center">
         <h1>Sign In</h1>
       </div>
@@ -24,7 +27,7 @@ const SignIn = () => {
                 name="email"
                 type="email"
                 className="form-control"
-                placeholder="Email address"
+                placeholder="Email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
               />
@@ -45,13 +48,19 @@ const SignIn = () => {
                   <div className="col">
                     <Link
                       to="/account/signup"
-                      className="col-6 btn btn-secondary btn-sm float-left"
+                      className="btn btn-secondary float-left"
                     >
+                      <i style={iconStyle} className="material-icons">
+                        arrow_back_ios
+                      </i>
                       SignUp
                     </Link>
                   </div>
                   <div className="col">
-                    <button className="col-6 btn btn-primary btn-sm float-right">
+                    <button
+                      disabled={!(email && password)}
+                      className="btn btn-primary float-right"
+                    >
                       Sign In
                     </button>
                   </div>
@@ -59,6 +68,13 @@ const SignIn = () => {
               </div>
             </div>
           </form>
+          <hr />
+          <div className="form-group">
+            <GoogleAuth />
+          </div>
+          <div className="form-group">
+            <FacebookAuth />
+          </div>
         </div>
       </div>
     </div>
