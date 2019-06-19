@@ -62,3 +62,20 @@ export const clearProduct = () => {
     type: 'CLEAR_PRODUCT'
   };
 };
+
+export const signOut = () => {
+  return {
+    type: 'SIGN_OUT'
+  };
+};
+
+export const signIn = (uid, displayName, email) => {
+  return {
+    type: 'SIGN_IN',
+    payload: {
+      uid,
+      displayName,
+      email
+    }
+  };
+};

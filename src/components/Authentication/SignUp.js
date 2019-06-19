@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { iconStyle } from '../../styles/icons';
 import GoogleAuth from './GoogleAuth';
 import FacebookAuth from './FacebookAuth';
+import firebase from '../../lib/firebase';
+import { signIn } from '../../actions';
 
-const SignUp = () => {
+const SignUp = props => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    const data = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password);
+    console.log(data.user);
+    const { user } = data;
+    props.signIn(user.uid, name, user.email);
   };
 
   return (
@@ -91,4 +100,7 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default connect(
+  null,
+  { signIn }
+)(SignUp);
