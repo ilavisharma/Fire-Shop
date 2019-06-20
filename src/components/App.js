@@ -1,17 +1,18 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import CardDeck from './Home/CardDeck';
 import About from './About';
 import ProductDetail from './ProductDetail';
 import SignIn from './Authentication/SignIn';
 import SignUp from './Authentication/SignUp';
+import history from '../history';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <Router history={history}>
           <Navbar />
           <Switch>
             <Route exact path="/" component={CardDeck} />
@@ -20,7 +21,7 @@ class App extends React.Component {
             <Route path="/account/signin" component={SignIn} />
             <Route path="/account/signup" component={SignUp} />
           </Switch>
-        </BrowserRouter>
+        </Router>
       </div>
     );
   }
