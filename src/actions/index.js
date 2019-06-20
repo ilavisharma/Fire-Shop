@@ -1,4 +1,5 @@
 import firebase from '../lib/firebase';
+import history from '../history';
 
 export const fetchProducts = () => async dispatch => {
   const ProductsRef = firebase.firestore().collection('products');
@@ -69,13 +70,36 @@ export const signOut = () => {
   };
 };
 
-export const signIn = (uid, displayName, email) => {
-  return {
-    type: 'SIGN_IN',
-    payload: {
-      uid,
-      displayName,
-      email
+export const signIn = ({ uid, displayName, email }) => async dispatch => {
+  // check this user in the database
+  const userRef = firebase
+    .firestore()
+    .collection('users')
+    .doc(uid);
+
+  try {
+    const doc = await userRef.get();
+
+    if (!doc.exists) {
+      // this is a new user
+      // save in the db
+      userRef.set({
+        uid,
+        displayName,
+        email
+      });
+
+      dispatch({
+        type: 'SIGN_IN',
+        payload: { uid, displayName, email }
+      });
+
+      history.push('/');
+    } else {
+      // this user already exists
+      // retrieve that user data
     }
-  };
+  } catch (e) {
+    console.log(e);
+  }
 };
