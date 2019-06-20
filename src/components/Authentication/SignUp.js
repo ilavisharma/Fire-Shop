@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { iconStyle } from '../../styles/icons';
-import GoogleAuth from './GoogleAuth';
-import FacebookAuth from './FacebookAuth';
 import firebase from '../../lib/firebase';
 import { signIn } from '../../actions';
 
@@ -19,9 +17,8 @@ const SignUp = props => {
     const data = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
-    console.log(data.user);
     const { user } = data;
-    props.signIn(user.uid, name, user.email);
+    props.signIn(user);
   };
 
   return (
@@ -104,13 +101,6 @@ const SignUp = props => {
               </div>
             </div>
           </form>
-          <hr />
-          <div className="form-group">
-            <GoogleAuth />
-          </div>
-          <div className="form-group">
-            <FacebookAuth />
-          </div>
         </div>
       </div>
     </div>
