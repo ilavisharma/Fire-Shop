@@ -11,9 +11,11 @@ const SignUp = props => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setIsLoading(true);
     const data = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
@@ -76,12 +78,27 @@ const SignUp = props => {
                     </Link>
                   </div>
                   <div className="col">
-                    <button
-                      disabled={!(name && email && password)}
-                      className="btn btn-primary float-right"
-                    >
-                      SignUp
-                    </button>
+                    {!isLoading ? (
+                      <button
+                        disabled={!(name && email && password)}
+                        className="btn btn-primary float-right"
+                      >
+                        SignUp
+                      </button>
+                    ) : (
+                      <button
+                        className="btn btn-primary float-right"
+                        type="button"
+                        disabled
+                      >
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                        Loading...
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
