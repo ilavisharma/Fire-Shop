@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 import { iconStyle } from '../../styles/icons';
 import firebase from '../../lib/firebase';
 import { signIn } from '../../actions';
@@ -14,11 +15,16 @@ const SignUp = props => {
   const handleSubmit = async e => {
     e.preventDefault();
     setIsLoading(true);
-    const data = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    const { user } = data;
-    props.signIn(user);
+    try {
+      const data = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      const { user } = data;
+      props.signIn(user);
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+    }
   };
 
   return (

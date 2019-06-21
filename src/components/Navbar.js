@@ -1,8 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { iconStyle } from '../styles/icons';
+import { connect } from 'react-redux';
+import { signIn, signOut } from '../actions';
 
 class Navbar extends React.Component {
+  renderAccount = () => {
+    const { auth } = this.props;
+    if (auth.isSignedIn) {
+      const name = auth.displayName || auth.email;
+      return name;
+    } else {
+      return 'Account';
+    }
+  };
+
   render() {
     return (
       <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -35,7 +47,7 @@ class Navbar extends React.Component {
             <i style={iconStyle} className="material-icons">
               account_circle
             </i>
-            Account
+            {this.renderAccount()}
           </Link>
         </nav>
       </div>
@@ -43,4 +55,13 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { signIn, signOut }
+)(Navbar);

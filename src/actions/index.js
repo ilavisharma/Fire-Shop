@@ -1,5 +1,6 @@
 import firebase from '../lib/firebase';
 import history from '../history';
+import { toast } from 'react-toastify';
 
 export const fetchProducts = () => async dispatch => {
   const ProductsRef = firebase.firestore().collection('products');
@@ -22,6 +23,7 @@ export const fetchProducts = () => async dispatch => {
     });
   } catch (e) {
     console.log('There was some error\n', e);
+    toast.error(e.message);
   }
 };
 
@@ -55,6 +57,7 @@ export const fetchProduct = docId => async dispatch => {
     }
   } catch (e) {
     console.log('There was some error\n', e);
+    toast.error(e.message);
   }
 };
 
@@ -93,7 +96,7 @@ export const signIn = ({ uid, displayName, email }) => async dispatch => {
         type: 'SIGN_IN',
         payload: { uid, displayName, email }
       });
-
+      toast.success('Succesfully signed in');
       history.push('/');
     } else {
       // this user already exists
@@ -101,5 +104,6 @@ export const signIn = ({ uid, displayName, email }) => async dispatch => {
     }
   } catch (e) {
     console.log(e);
+    toast.error(e.message);
   }
 };
