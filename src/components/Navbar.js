@@ -3,8 +3,19 @@ import { Link } from 'react-router-dom';
 import { iconStyle } from '../styles/icons';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
+import firebase from '../lib/firebase';
 
 class Navbar extends React.Component {
+  componentDidMount() {
+    // auth state listener
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(user);
+        this.props.signIn(user);
+      }
+    });
+  }
+
   renderAccount = () => {
     const { auth } = this.props;
     if (auth.isSignedIn) {
