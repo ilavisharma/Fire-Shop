@@ -68,13 +68,23 @@ export const clearProduct = () => {
 };
 
 export const signOut = () => {
+  firebase.auth().signOut();
+  toast.success('Signed out succesfully');
+  history.push('/');
   return {
     type: 'SIGN_OUT'
   };
 };
 
 export const signIn = ({ uid, displayName, email }) => async dispatch => {
+  dispatch({
+    type: 'SIGN_IN',
+    payload: { uid, displayName, email }
+  });
+  toast.success(`Welcome ${displayName || email}`);
+
   // check this user in the database
+
   const userRef = firebase
     .firestore()
     .collection('users')
@@ -91,17 +101,12 @@ export const signIn = ({ uid, displayName, email }) => async dispatch => {
         displayName,
         email
       });
-
-      dispatch({
-        type: 'SIGN_IN',
-        payload: { uid, displayName, email }
-      });
-      toast.success('Succesfully signed in');
-      history.push('/');
     } else {
       // this user already exists
       // retrieve that user data
     }
+
+    history.push('/');
   } catch (e) {
     console.log(e);
     toast.error(e.message);
