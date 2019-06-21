@@ -7,7 +7,6 @@ import firebase from '../../lib/firebase';
 import { signIn } from '../../actions';
 
 const SignUp = props => {
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +23,7 @@ const SignUp = props => {
     } catch (e) {
       console.log(e);
       toast.error(e.message);
+      setIsLoading(false);
     }
   };
 
@@ -36,16 +36,6 @@ const SignUp = props => {
       <div className="row justify-content-center align-items-center">
         <div className="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
           <form onSubmit={e => handleSubmit(e)}>
-            <div className="form-group">
-              <input
-                name="name"
-                type="text"
-                className="form-control"
-                placeholder="Name"
-                value={name}
-                onChange={e => setName(e.target.value)}
-              />
-            </div>
             <div className="form-group">
               <input
                 name="email"
@@ -83,7 +73,7 @@ const SignUp = props => {
                   <div className="col">
                     {!isLoading ? (
                       <button
-                        disabled={!(name && email && password)}
+                        disabled={!(email && password)}
                         className="btn btn-primary float-right"
                       >
                         SignUp
