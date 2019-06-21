@@ -3,13 +3,30 @@ import { Link } from 'react-router-dom';
 import { iconStyle } from '../../styles/icons';
 import GoogleAuth from './GoogleAuth';
 import FacebookAuth from './FacebookAuth';
+import firebase from '../../lib/firebase';
+import { signIn } from '../../actions';
+import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
-const SignIn = () => {
+const SignIn = props => {
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    setIsLoading(true);
+    try {
+      const data = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+      const { user } = data;
+      props.signIn(user);
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -56,12 +73,27 @@ const SignIn = () => {
                     </Link>
                   </div>
                   <div className="col">
-                    <button
-                      disabled={!(email && password)}
-                      className="btn btn-primary float-right"
-                    >
-                      Sign In
-                    </button>
+                    {!isLoading ? (
+                      <button
+                        disabled={!(email && password)}
+                        className="btn btn-primary float-right"
+                      >
+                        SignIn
+                      </button>
+                    ) : (
+                      <button
+                        className="btn btn-primary float-right"
+                        type="button"
+                        disabled
+                      >
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        />
+                        Loading...
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -80,4 +112,7 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default connect(
+  null,
+  { signIn }
+)(SignIn);
