@@ -7,6 +7,8 @@ import ProductDetail from './ProductDetail';
 import SignIn from './Authentication/SignIn';
 import SignUp from './Authentication/SignUp';
 import history from '../history';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
   render() {
@@ -14,6 +16,7 @@ class App extends React.Component {
       <div>
         <Router history={history}>
           <Navbar />
+          <ToastContainer autoclose={2000} />
           <Switch>
             <Route exact path="/" component={CardDeck} />
             <Route path="/about" component={About} />
