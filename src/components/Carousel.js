@@ -13,7 +13,7 @@ const Carousel = props => {
       }}
     >
       {images.map(image => (
-        <GalleryImage src={image} />
+        <GalleryImage key={image} src={image} />
       ))}
     </Gallery>
   );

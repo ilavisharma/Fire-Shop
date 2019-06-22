@@ -27,7 +27,11 @@ class CardDeck extends React.Component {
     const { products } = this.props;
     if (products !== []) {
       return products.map(product => (
-        <Link style={{ textDecoration: 'none' }} to={`/product/${product.id}`}>
+        <Link
+          key={product.id}
+          style={{ textDecoration: 'none' }}
+          to={`/product/${product.id}`}
+        >
           <ProductCard
             photos={product.image}
             price={`Rs ${product.price}`}
