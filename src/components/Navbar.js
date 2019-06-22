@@ -52,6 +52,7 @@ class Navbar extends React.Component {
               shopping_cart
             </i>
             Cart
+            <span className="badge badge-dark">{this.props.cart.length}</span>
           </Link>
           <Link className="p-2 text-dark" to="/myaccount/info">
             <i style={iconStyle} className="material-icons">
@@ -67,7 +68,8 @@ class Navbar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    cart: state.cart
   };
 };
 
