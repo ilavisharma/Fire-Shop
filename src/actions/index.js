@@ -76,12 +76,14 @@ export const signOut = () => {
   };
 };
 
-export const signIn = ({ uid, displayName, email }) => async dispatch => {
+export const signIn = ({ uid, displayName, email }, showToast=true) => async dispatch => {
   dispatch({
     type: 'SIGN_IN',
     payload: { uid, displayName, email }
   });
-  toast.success(`Welcome ${displayName || email}`);
+
+  if (showToast) {
+  toast.success(`Welcome ${displayName || email}`);}
 
   // check this user in the database
 
