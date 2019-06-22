@@ -10,7 +10,6 @@ class Navbar extends React.Component {
     // auth state listener
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         this.props.signIn(user, false);
       }
     });
