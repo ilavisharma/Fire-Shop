@@ -10,6 +10,7 @@ import history from '../history';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyAccount from './Authentication/MyAccount';
+import Cart from './Cart';
 
 class App extends React.Component {
   render() {
@@ -22,7 +23,8 @@ class App extends React.Component {
             <Route exact path="/" component={CardDeck} />
             <Route path="/about" component={About} />
             <Route path="/product/:id" component={ProductDetail} />
-            <Route path="/myaccount" component={MyAccount} />
+            <Route path="/myaccount/info" component={MyAccount} />
+            <Route path="/myaccount/cart" component={Cart} />
             <Route path="/account/signin" component={SignIn} />
             <Route path="/account/signup" component={SignUp} />
           </Switch>
