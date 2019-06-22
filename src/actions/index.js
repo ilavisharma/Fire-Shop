@@ -76,14 +76,18 @@ export const signOut = () => {
   };
 };
 
-export const signIn = ({ uid, displayName, email }, showToast=true) => async dispatch => {
+export const signIn = (
+  { uid, displayName, email },
+  showToast = true
+) => async dispatch => {
   dispatch({
     type: 'SIGN_IN',
     payload: { uid, displayName, email }
   });
 
   if (showToast) {
-  toast.success(`Welcome ${displayName || email}`);}
+    toast.success(`Welcome ${displayName || email}`);
+  }
 
   // check this user in the database
 
@@ -113,4 +117,32 @@ export const signIn = ({ uid, displayName, email }, showToast=true) => async dis
     console.log(e);
     toast.error(e.message);
   }
+};
+
+export const addToCart = product => {
+  return {
+    type: 'ADD_TO_CART',
+    payload: { ...product, quantity: 1 }
+  };
+};
+
+export const removeFromCart = product => {
+  return {
+    type: 'REMOVE_FROM_CART',
+    payload: product
+  };
+};
+
+export const incrementProduct = product => {
+  return {
+    type: 'INCREMENT',
+    payload: product
+  };
+};
+
+export const decrementProduct = product => {
+  return {
+    type: 'DECREMENT',
+    payload: product
+  };
 };
