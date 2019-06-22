@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchProduct, clearProduct } from '../actions';
+import { fetchProduct, clearProduct, addToCart } from '../actions';
 import { Helmet } from 'react-helmet';
 import Carousel from './Carousel';
 
@@ -12,6 +12,10 @@ class ProductDetail extends React.Component {
   componentWillUnmount() {
     this.props.clearProduct();
   }
+
+  onAddToCartClick = () => {
+    this.props.addToCart(this.props.product);
+  };
 
   render() {
     if (!this.props.product) {
@@ -42,6 +46,12 @@ class ProductDetail extends React.Component {
               <h4 className="display-4">{name}</h4>
               <Carousel images={image} />
               <h5>{`Rs ${price}`}</h5>
+              <button
+                onClick={this.onAddToCartClick}
+                className="btn btn-outline-success btn-lg"
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
@@ -52,11 +62,12 @@ class ProductDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.currentProduct
+    product: state.currentProduct,
+    cart: state.cart
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchProduct, clearProduct }
+  { fetchProduct, clearProduct, addToCart }
 )(ProductDetail);
