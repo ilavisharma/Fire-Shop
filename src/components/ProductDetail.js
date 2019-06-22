@@ -35,11 +35,11 @@ class ProductDetail extends React.Component {
             <title>{name}</title>
           </Helmet>
           <div className="row">
-            <div class="col-md-3">
-              <div class="list-group">
-                <li class="list-group-item active">Info 1</li>
-                <li class="list-group-item">Info 2</li>
-                <li class="list-group-item">Info 3</li>
+            <div className="col-md-3">
+              <div className="list-group">
+                <li className="list-group-item active">Info 1</li>
+                <li className="list-group-item">Info 2</li>
+                <li className="list-group-item">Info 3</li>
               </div>
             </div>
             <div className="col-md-9">
