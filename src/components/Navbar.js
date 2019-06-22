@@ -47,13 +47,13 @@ class Navbar extends React.Component {
             </i>
             About
           </Link>
-          <Link className="p-2 text-dark" to="#">
+          <Link className="p-2 text-dark" to="/myaccount/cart">
             <i style={iconStyle} className="material-icons">
               shopping_cart
             </i>
             Cart
           </Link>
-          <Link className="p-2 text-dark" to="/myaccount">
+          <Link className="p-2 text-dark" to="/myaccount/info">
             <i style={iconStyle} className="material-icons">
               account_circle
             </i>
