@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
 import './AuthButton.css';
+import firebase from '../../lib/firebase';
+import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
+import { signIn } from '../../actions';
 
 class FacebookAuth extends Component {
+  onButtonClick = async () => {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    try {
+      const result = await firebase.auth().signInWithPopup(provider);
+      const { user } = result;
+      console.log(user);
+      this.props.signIn(user);
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+    }
+  };
+
   render() {
     return (
-      <button className="loginBtn loginBtn--facebook">
+      <button
+        onClick={this.onButtonClick}
+        className="loginBtn loginBtn--facebook"
+      >
         Login with Facebook
       </button>
     );
   }
 }
 
-export default FacebookAuth;
+export default connect(
+  null,
+  { signIn }
+)(FacebookAuth);
