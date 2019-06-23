@@ -27,41 +27,70 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 className="my-0 mr-md-auto font-weight-normal">
-          <i style={iconStyle} className="material-icons">
-            music_note
-          </i>
-          Guitar Shop
-        </h5>
-        <nav className="my-2 my-md-0 mr-md-3">
-          <Link className="p-2 text-dark" to="/">
+      <nav
+        className="navbar navbar-expand-md navbar-light sticky-top "
+        style={{
+          backgroundColor: '#545ADE',
+          fontFamily: 'Roboto',
+          fontSize: '21'
+        }}
+      >
+        <div className="container-fluid">
+          <Link to="/" className="navbar-brand mb-0 h1">
             <i style={iconStyle} className="material-icons">
-              home
+              music_note
             </i>
-            Home
+            Guitar Shop
           </Link>
-          <Link className="p-2 text-dark" to="/about">
-            <i style={iconStyle} className="material-icons">
-              info
-            </i>
-            About
-          </Link>
-          <Link className="p-2 text-dark" to="/myaccount/cart">
-            <i style={iconStyle} className="material-icons">
-              shopping_cart
-            </i>
-            Cart
-            <span className="badge badge-dark">{this.props.cart.length}</span>
-          </Link>
-          <Link className="p-2 text-dark" to="/myaccount/info">
-            <i style={iconStyle} className="material-icons">
-              account_circle
-            </i>
-            {this.renderAccount()}
-          </Link>
-        </nav>
-      </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item ">
+                <Link to="#" className="nav-link">
+                  <i style={iconStyle} className="material-icons">
+                    home
+                  </i>
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link to="/about" className="nav-link">
+                  <i style={iconStyle} className="material-icons">
+                    info
+                  </i>
+                  About
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link to="/myaccount/cart" className="nav-link">
+                  <i style={iconStyle} className="material-icons">
+                    shopping_cart
+                  </i>
+                  Cart
+                  <span className="badge badge-dark">
+                    {this.props.cart.length}
+                  </span>
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link to="/myaccount/info" className="nav-link">
+                  <i style={iconStyle} className="material-icons">
+                    account_circle
+                  </i>
+                  {this.renderAccount()}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     );
   }
 }
