@@ -5,7 +5,11 @@ import {} from '../actions';
 
 const Cart = props => {
   const renderList = () =>
-    props.cart.map(item => <li className="list-group-item">{item.name}</li>);
+    props.cart.map(item => (
+      <li key={item.id} className="list-group-item">
+        {item.name}
+      </li>
+    ));
 
   if (props.cart.length !== 0) {
     return (
