@@ -20,7 +20,7 @@ class ProductDetail extends React.Component {
   render() {
     if (!this.props.product) {
       return (
-        <div className="text-center">
+        <div className="text-center my-5">
           <div className="spinner-border" role="status">
             <span className="sr-only">Loading...</span>
           </div>
@@ -29,7 +29,7 @@ class ProductDetail extends React.Component {
     } else {
       const { price, image, name } = this.props.product;
       return (
-        <div className="container">
+        <div className="container my-5">
           {/* Helmet for meta tags */}
           <Helmet>
             <title>{name}</title>
@@ -42,7 +42,7 @@ class ProductDetail extends React.Component {
                 <li className="list-group-item">Info 3</li>
               </div>
             </div>
-            <div className="col-md-9">
+            <div className="col-md-9 mb-5">
               <h4 className="display-4">{name}</h4>
               <Carousel images={image} />
               <h5>{`Rs ${price}`}</h5>
