@@ -119,11 +119,16 @@ export const signIn = (
   }
 };
 
-export const addToCart = product => {
-  return {
-    type: 'ADD_TO_CART',
-    payload: { ...product, quantity: 1 }
-  };
+export const addToCart = product => (dispatch, getState) => {
+  const { isSignedIn } = getState().auth;
+  if (!isSignedIn) {
+    return toast.warn('You need to sign in first');
+  } else {
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: { ...product, quantity: 1 }
+    });
+  }
 };
 
 export const removeFromCart = product => {
