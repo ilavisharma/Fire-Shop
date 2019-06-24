@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
   isSignedIn: false,
   uid: null,
-  displayName: null
+  displayName: null,
+  photoURL: null
 };
 
 export default (state = INITIAL_STATE, action) => {
