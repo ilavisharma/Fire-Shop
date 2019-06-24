@@ -52,7 +52,7 @@ class CardDeck extends React.Component {
   render() {
     if (this.props.products.length === 0) {
       return (
-        <div className="text-center">
+        <div className="text-center mt-5">
           <div className="spinner-border" role="status">
             <span className="sr-only">Loading...</span>
           </div>
@@ -60,7 +60,7 @@ class CardDeck extends React.Component {
       );
     } else {
       return (
-        <div className="container-fluid">
+        <div className="container-fluid mt-5">
           <div className="card-container">
             {/* Helmet for meta tags */}
             <Helmet>
