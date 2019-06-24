@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { iconStyle } from '../../styles/icons';
 import firebase from '../../lib/firebase';
 import { signIn } from '../../actions';
+import history from '../../history';
 
 const SignUp = props => {
   const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ const SignUp = props => {
         .createUserWithEmailAndPassword(email, password);
       const { user } = data;
       props.signIn(user);
+      history.push('/');
     } catch (e) {
       console.log(e);
       toast.error(e.message);

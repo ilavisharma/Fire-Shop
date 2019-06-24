@@ -7,6 +7,7 @@ import firebase from '../../lib/firebase';
 import { signIn } from '../../actions';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import history from '../../history';
 
 const SignIn = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +23,7 @@ const SignIn = props => {
         .signInWithEmailAndPassword(email, password);
       const { user } = data;
       props.signIn(user);
+      history.push('/');
     } catch (e) {
       console.log(e);
       toast.error(e.message);
