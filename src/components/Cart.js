@@ -1,15 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import {} from '../actions';
+import { incrementProduct, decrementProduct } from '../actions';
 
 const Cart = props => {
   const renderList = () =>
     props.cart.map(item => (
-      <li key={item.id} className="list-group-item">
-        {item.name}
-      </li>
+      <div className="row my-4">
+        <div className="col col-6">{item.name}</div>
+        <div className="col col-3">
+          <button className="btn btn-secondary btn-sm mx-2">-</button>
+          {item.quantity}
+          <button className="btn btn-secondary btn-sm mx-2">+</button>
+        </div>
+        <div className="col col-3">{`Rs ${item.price * item.quantity}`}</div>
+      </div>
     ));
+
+  const calcTotal = () => {
+    let total = 0;
+    props.cart.forEach(item => (total += item.price));
+    return total;
+  };
 
   if (props.cart.length !== 0) {
     return (
@@ -18,7 +30,11 @@ const Cart = props => {
         <Helmet>
           <title>{`${props.cart.length} items in cart`}</title>
         </Helmet>
-        <ul className="list-group list-group-flush">{renderList()}</ul>
+        <h1 className="display-4 mb-4">These are the items in your cart</h1>
+        {renderList()}
+        <div className="container">
+          <div className="float-right">Total {` Rs ${calcTotal()}`}</div>
+        </div>
       </div>
     );
   } else {
@@ -42,5 +58,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {}
+  { incrementProduct, decrementProduct }
 )(Cart);
