@@ -53,7 +53,7 @@ class Navbar extends React.Component {
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item ">
-                <Link to="#" className="nav-link">
+                <Link to="/" className="nav-link">
                   <i style={iconStyle} className="material-icons">
                     home
                   </i>
