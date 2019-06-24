@@ -77,12 +77,12 @@ export const signOut = () => {
 };
 
 export const signIn = (
-  { uid, displayName, email },
+  { uid, displayName, email, photoURL },
   showToast = true
 ) => async dispatch => {
   dispatch({
     type: 'SIGN_IN',
-    payload: { uid, displayName, email }
+    payload: { uid, displayName, email, photoURL }
   });
 
   if (showToast) {
@@ -112,7 +112,7 @@ export const signIn = (
       // retrieve that user data
     }
 
-    history.push('/');
+    // history.push('/');
   } catch (e) {
     console.log(e);
     toast.error(e.message);
