@@ -124,10 +124,19 @@ export const addToCart = product => (dispatch, getState) => {
   if (!isSignedIn) {
     return toast.warn('You need to sign in first');
   } else {
+    const {cart}= getState();
+    // check if this product is already present in cart
+
+    const exists= cart.find(item => item.id === product.id)
+
+    if (exists) {
+      toast.info('This item already exixts in your cart');
+    } else {
+    
     dispatch({
       type: 'ADD_TO_CART',
       payload: { ...product, quantity: 1 }
-    });
+    });}
   }
 };
 
