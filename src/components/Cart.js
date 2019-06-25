@@ -9,9 +9,20 @@ const Cart = props => {
       <div className="row my-4">
         <div className="col col-6">{item.name}</div>
         <div className="col col-3">
-          <button className="btn btn-secondary btn-sm mx-2">-</button>
+          <button
+            onClick={e => props.decrementProduct(item)}
+            className="btn btn-secondary btn-sm mx-2"
+            disabled={item.quantity === 1}
+          >
+            -
+          </button>
           {item.quantity}
-          <button className="btn btn-secondary btn-sm mx-2">+</button>
+          <button
+            onClick={e => props.incrementProduct(item)}
+            className="btn btn-secondary btn-sm mx-2"
+          >
+            +
+          </button>
         </div>
         <div className="col col-3">{`Rs ${item.price * item.quantity}`}</div>
       </div>
@@ -19,7 +30,7 @@ const Cart = props => {
 
   const calcTotal = () => {
     let total = 0;
-    props.cart.forEach(item => (total += item.price));
+    props.cart.forEach(item => (total += item.price * item.quantity));
     return total;
   };
 
