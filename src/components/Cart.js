@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { incrementProduct, decrementProduct } from '../actions';
+import { iconStyle } from '../styles/icons';
+import { incrementProduct, decrementProduct, removeFromCart } from '../actions';
 
 const Cart = props => {
   const renderList = () =>
     props.cart.map(item => (
       <div className="row my-4">
-        <div className="col col-6">{item.name}</div>
+        <div className="col col-5">{item.name}</div>
         <div className="col col-3">
           <button
             onClick={() => props.decrementProduct(item)}
@@ -25,6 +26,15 @@ const Cart = props => {
           </button>
         </div>
         <div className="col col-3">{`Rs ${item.price * item.quantity}`}</div>
+        <div className="col col-1">
+          <i
+            onClick={() => props.removeFromCart(item)}
+            className="material-icons"
+            style={{ ...iconStyle, cursor: 'pointer' }}
+          >
+            delete
+          </i>
+        </div>
       </div>
     ));
 
@@ -69,5 +79,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { incrementProduct, decrementProduct }
+  { incrementProduct, decrementProduct, removeFromCart }
 )(Cart);
