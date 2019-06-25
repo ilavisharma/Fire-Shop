@@ -10,7 +10,7 @@ const Cart = props => {
         <div className="col col-6">{item.name}</div>
         <div className="col col-3">
           <button
-            onClick={e => props.decrementProduct(item)}
+            onClick={() => props.decrementProduct(item)}
             className="btn btn-secondary btn-sm mx-2"
             disabled={item.quantity === 1}
           >
@@ -18,7 +18,7 @@ const Cart = props => {
           </button>
           {item.quantity}
           <button
-            onClick={e => props.incrementProduct(item)}
+            onClick={() => props.incrementProduct(item)}
             className="btn btn-secondary btn-sm mx-2"
           >
             +
