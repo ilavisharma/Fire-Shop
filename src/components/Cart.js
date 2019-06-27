@@ -7,7 +7,7 @@ import { incrementProduct, decrementProduct, removeFromCart } from '../actions';
 const Cart = props => {
   const renderList = () =>
     props.cart.map(item => (
-      <div className="row my-4">
+      <div key={item.id} className="row my-4">
         <div className="col col-5">{item.name}</div>
         <div className="col col-3">
           <button
@@ -56,6 +56,7 @@ const Cart = props => {
         <div className="container">
           <div className="float-right">Total {` Rs ${calcTotal()}`}</div>
         </div>
+        
       </div>
     );
   } else {
