@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { iconStyle } from '../styles/icons';
 import { incrementProduct, decrementProduct, removeFromCart } from '../actions';
+import Checkout from './Checkout';
 
 const Cart = props => {
   const renderList = () =>
@@ -56,7 +57,8 @@ const Cart = props => {
         <div className="container">
           <div className="float-right">Total {` Rs ${calcTotal()}`}</div>
         </div>
-        
+        <br />
+        <Checkout amount={calcTotal() * 100} />
       </div>
     );
   } else {
