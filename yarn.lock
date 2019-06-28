@@ -8892,9 +8892,9 @@ react-transition-group@^2.6.1:
     react-lifecycles-compat "^3.0.4"
 
 react-ui-cards@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/react-ui-cards/-/react-ui-cards-1.5.2.tgz#9c231cff8b073f7a6bcf3d453e6156abcb9bd065"
-  integrity sha512-iYq4Vj9jdN86aw6j5R5XVBB083NnESaNJ9H5BkrQEe5aTMnw15xJTpKSWvLY9hhVvsIag9Q5FiL++KRh8FXNTw==
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/react-ui-cards/-/react-ui-cards-1.5.3.tgz#51f784865d09e78bc35cf62e5da3552d3c1e094a"
+  integrity sha512-3+YWhyexkMvEgkrlLmQ0tumsgxbt1wCYEOb9kd3wlCak6Rfyw5oMi1jvjjqR2scNg+I57GqpWihYGxncBTp+TA==
   dependencies:
     chart.js "^2.7.2"
     react "^16.4.1"
