@@ -10,7 +10,7 @@ class ProductDetail extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.clearProduct();
+    // this.props.clearProduct();
   }
 
   onAddToCartClick = () => {
