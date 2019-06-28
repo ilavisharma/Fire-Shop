@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
 
 class Checkout extends Component {
+  // options to be provided
   options = {
     key: 'rzp_test_hqmemb6VQxI36u',
-    amount: this.props.amount,
     name: 'Guitar Shop',
     description: 'A ReactJS Project',
     handler: response => {
       // handler function
-      alert(response.razorpay_payment_id);
+      const { razorpay_payment_id: paymentId } = response;
+      console.log(orderId, paymentId, signature);
+    },
+    payment_capture: 1,
+    modal: {
+      ondismiss: function() {
+        console.log('Checkout form closed by the yser');
+      }
     }
   };
 
   componentDidMount() {
-    this.rzp = new window.Razorpay(this.options);
-    console.log(this.rzp);
+    this.rzp = new window.Razorpay({
+      ...this.options,
+      amount: this.props.amount
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.amount !== this.props.amount) {
+      this.rzp = new window.Razorpay({
+        ...this.options,
+        amount: this.props.amount
+      });
+    }
   }
 
   handleClick = () => {
     this.rzp.open();
-    console.log('Payment was just made');
   };
 
   render() {
+    // console.log(this.props.amount);
     return (
       <div>
         <button
