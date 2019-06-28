@@ -37,7 +37,6 @@ class CardDeck extends React.Component {
             price={`Rs ${product.price}`}
             productName={product.name}
             key={product.id}
-            buttonText=""
           />
         </Link>
       ));
