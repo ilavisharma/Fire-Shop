@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createOrder } from '../actions';
 
 class Checkout extends Component {
   // options to be provided
@@ -9,12 +11,13 @@ class Checkout extends Component {
     handler: response => {
       // handler function
       const { razorpay_payment_id: paymentId } = response;
-      console.log(orderId, paymentId, signature);
+      this.props.createOrder(paymentId);
+      console.log(paymentId);
     },
     payment_capture: 1,
     modal: {
       ondismiss: function() {
-        console.log('Checkout form closed by the yser');
+        console.log('Checkout form closed by the user');
       }
     }
   };
@@ -52,4 +55,7 @@ class Checkout extends Component {
   }
 }
 
-export default Checkout;
+export default connect(
+  null,
+  { createOrder }
+)(Checkout);
