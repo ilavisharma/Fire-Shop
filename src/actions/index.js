@@ -90,7 +90,6 @@ export const signIn = (
   }
 
   // check this user in the database
-
   const userRef = firebase
     .firestore()
     .collection('users')
@@ -107,12 +106,7 @@ export const signIn = (
         displayName,
         email
       });
-    } else {
-      // this user already exists
-      // retrieve that user data
     }
-
-    // history.push('/');
   } catch (e) {
     console.log(e);
     toast.error(e.message);
@@ -124,19 +118,19 @@ export const addToCart = product => (dispatch, getState) => {
   if (!isSignedIn) {
     return toast.warn('You need to sign in first');
   } else {
-    const {cart}= getState();
+    const { cart } = getState();
     // check if this product is already present in cart
 
-    const exists= cart.find(item => item.id === product.id)
+    const exists = cart.find(item => item.id === product.id);
 
     if (exists) {
-      toast.info('This item already exixts in your cart');
+      toast.info('This item already exists in your cart');
     } else {
-    
-    dispatch({
-      type: 'ADD_TO_CART',
-      payload: { ...product, quantity: 1 }
-    });}
+      dispatch({
+        type: 'ADD_TO_CART',
+        payload: { ...product, quantity: 1, image: undefined }
+      });
+    }
   }
 };
 
@@ -159,4 +153,31 @@ export const decrementProduct = product => {
     type: 'DECREMENT',
     payload: product
   };
+};
+
+export const createOrder = paymentId => async (dispatch, getState) => {
+  const { cart } = getState();
+
+  // create new document in orders collection with all the details
+  const response = await firebase
+    .firestore()
+    .collection('orders')
+    .add({
+      cart,
+      paymentId,
+      time: new Date()
+    });
+
+  // store the above document id in the user's orders array
+  const { auth } = getState();
+  await firebase
+    .firestore()
+    .collection('users')
+    .doc(auth.uid)
+    .update({
+      orders: firebase.firestore.FieldValue.arrayUnion({
+        orderId: response.id,
+        time: new Date()
+      })
+    });
 };
