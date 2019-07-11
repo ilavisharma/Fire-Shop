@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import MyAccount from './Authentication/MyAccount';
 import Cart from './Cart';
 
+import { hot } from 'react-hot-loader/root';
+
 class App extends React.Component {
   render() {
     return (
@@ -34,4 +36,5 @@ class App extends React.Component {
   }
 }
 
-export default App;
+// export default App;
+export default (process.env.NODE_ENV === 'development' ? hot(App) : App);

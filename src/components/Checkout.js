@@ -11,7 +11,7 @@ class Checkout extends Component {
     handler: response => {
       // handler function
       const { razorpay_payment_id: paymentId } = response;
-      this.props.createOrder(paymentId);
+      // this.props.createOrder(paymentId);
       console.log(paymentId);
     },
     payment_capture: 1,
@@ -30,6 +30,7 @@ class Checkout extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // if the amount has changed
     if (prevProps.amount !== this.props.amount) {
       this.rzp = new window.Razorpay({
         ...this.options,
@@ -49,7 +50,7 @@ class Checkout extends Component {
         <button
           onClick={this.handleClick}
           className="btn btn-primary"
-        >{`Pay Rs ${this.props.amount}`}</button>
+        >{`Pay ₹ ${this.props.amount / 100}`}</button>
       </div>
     );
   }

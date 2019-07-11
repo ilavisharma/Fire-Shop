@@ -37,7 +37,7 @@ class MyAccount extends Component {
               SignOut
             </button>
 
-            <h1 className="display-4 mt-5">Here are your recent orders</h1>
+            <h1 className="display-4 mt-5">Here are your recent orders:</h1>
           </div>
         </div>
       </div>
