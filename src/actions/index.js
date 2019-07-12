@@ -113,6 +113,7 @@ export const signIn = (
   }
 };
 
+// CART ACTIONS
 export const addToCart = product => (dispatch, getState) => {
   const { isSignedIn } = getState().auth;
   if (!isSignedIn) {
@@ -126,9 +127,12 @@ export const addToCart = product => (dispatch, getState) => {
     if (exists) {
       toast.info('This item already exists in your cart');
     } else {
+      // create a new object so that the image can be removed
+      const tempProduct = { ...product };
+      delete tempProduct.image;
       dispatch({
         type: 'ADD_TO_CART',
-        payload: { ...product, quantity: 1, image: undefined }
+        payload: { ...tempProduct, quantity: 1 }
       });
     }
   }
@@ -155,29 +159,49 @@ export const decrementProduct = product => {
   };
 };
 
+export const clearCart = () => {
+  return {
+    type: 'CLEAR_CART'
+  };
+};
+
 export const createOrder = paymentId => async (dispatch, getState) => {
-  const { cart } = getState();
+  const { cart, auth } = getState();
 
   // create new document in orders collection with all the details
-  const response = await firebase
-    .firestore()
-    .collection('orders')
-    .add({
+  try {
+    const order = {
       cart,
       paymentId,
       time: new Date()
-    });
+    };
 
-  // store the above document id in the user's orders array
-  const { auth } = getState();
-  await firebase
-    .firestore()
-    .collection('users')
-    .doc(auth.uid)
-    .update({
-      orders: firebase.firestore.FieldValue.arrayUnion({
-        orderId: response.id,
-        time: new Date()
-      })
-    });
+    const response = await firebase
+      .firestore()
+      .collection('orders')
+      .add(order);
+
+    // store the above document id in the user's orders array
+
+    await firebase
+      .firestore()
+      .collection('users')
+      .doc(auth.uid)
+      .update({
+        orders: firebase.firestore.FieldValue.arrayUnion({
+          orderId: response.id,
+          time: new Date()
+        })
+      });
+
+    history.push('/myaccount/info');
+
+    // TODO: clear the cart now
+
+    // dispatch({
+    //   type: 'CLEAR_CART'
+    // });
+  } catch (e) {
+    console.log(e, e.message);
+  }
 };
