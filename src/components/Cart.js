@@ -53,6 +53,7 @@ const Cart = props => {
           <title>{`${props.cart.length} items in cart`}</title>
         </Helmet>
         <h1 className="display-4 mb-4">These are the items in your cart</h1>
+        <hr/>
         {renderList()}
         <div className="container">
           <div className="float-right">Total {` Rs ${calcTotal()}`}</div>
