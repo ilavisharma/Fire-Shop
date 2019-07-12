@@ -3,18 +3,23 @@ import { connect } from 'react-redux';
 import { createOrder } from '../actions';
 
 class Checkout extends Component {
-  // options to be provided
+  // checkout handler
+  handleCheckout = paymentId => {
+    this.props.createOrder(paymentId);
+    // TODO: add success redirect here
+    alert('Your order was successfully placed');
+  };
+
+  // options to be provided for payment gateway
   options = {
-    key: 'rzp_test_hqmemb6VQxI36u',
+    key: 'rzp_test_QmAVKoFyG0mzMW',
     name: 'Guitar Shop',
     description: 'A ReactJS Project',
     handler: response => {
       // handler function
       const { razorpay_payment_id: paymentId } = response;
-      // this.props.createOrder(paymentId);
-      console.log(paymentId);
+      this.handleCheckout(paymentId);
     },
-    payment_capture: 1,
     modal: {
       ondismiss: function() {
         console.log('Checkout form closed by the user');
