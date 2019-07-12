@@ -22,7 +22,10 @@ export default (state = [], action) => {
         } else newCart.push(item);
       });
       return newCart;
-
+    case 'CLEAR_CART':
+      // TODO: FIX THIS
+      state.length = 0;
+      return state;
     default:
       return state;
   }
