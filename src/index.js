@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import './custom.scss';
+import 'jquery/dist/jquery.slim';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import App from './components/App';
 import reducers from './reducers';

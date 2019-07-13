@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyAccount from './Authentication/MyAccount';
 import Cart from './Cart';
+import Error404 from './Error404';
 
 import { hot } from 'react-hot-loader/root';
 
@@ -29,6 +30,7 @@ class App extends React.Component {
             <Route path="/myaccount/cart" component={Cart} />
             <Route path="/account/signin" component={SignIn} />
             <Route path="/account/signup" component={SignUp} />
+            <Route component={Error404} />
           </Switch>
         </Router>
       </div>

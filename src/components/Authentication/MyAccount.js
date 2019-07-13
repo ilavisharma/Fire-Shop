@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import history from '../../history';
 import { signOut } from '../../actions';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
 
 class MyAccount extends Component {
   async componentDidMount() {
@@ -15,32 +16,33 @@ class MyAccount extends Component {
 
   render() {
     return (
-      <div className="container mt-4">
-        <div className="row">
-          <div className="col col-3">
-            <img
-              src={
-                this.props.auth.photoURL ||
-                'https://banner2.kisspng.com/20180707/qiy/kisspng-computer-icons-user-account-user-profile-clip-art-account-icon-5b40a50d1441e3.591738481530963213083.jpg'
-              }
-              alt="account"
-              className="img-thumbnail"
-            />
-          </div>
-          <div className="col col-9">
-            <h3 className="display-3">
-              {this.props.auth.displayName || this.props.auth.email}
-            </h3>
-            <br />
+      <>
+        <Helmet>
+          <title>My Account</title>
+        </Helmet>
+        <div className="container mt-4">
+          <div className="row">
+            <div className="col col-3">
+              <img
+                src={this.props.auth.photoURL || '/img/avatar.png'}
+                alt="account"
+                className="img-thumbnail"
+              />
+            </div>
+            <div className="col col-9">
+              <h3 className="display-4">
+                {this.props.auth.displayName || this.props.auth.email}
+              </h3>
+              <br />
 
-            <button onClick={this.props.signOut} className="btn btn-primary">
-              SignOut
-            </button>
-
-            <h1 className="display-4 mt-5">Here are your recent orders:</h1>
+              <button onClick={this.props.signOut} className="btn btn-primary">
+                Sign Out
+              </button>
+            </div>
+            <h1 className="display-5 mt-5">Here are your recent orders:</h1>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

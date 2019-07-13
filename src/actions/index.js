@@ -194,13 +194,15 @@ export const createOrder = paymentId => async (dispatch, getState) => {
         })
       });
 
+    toast.success('Your order was successfully placed');
+
     history.push('/myaccount/info');
 
     // TODO: clear the cart now
 
-    // dispatch({
-    //   type: 'CLEAR_CART'
-    // });
+    dispatch({
+      type: 'CLEAR_CART'
+    });
   } catch (e) {
     console.log(e, e.message);
   }
